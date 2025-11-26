@@ -16,7 +16,7 @@ namespace DevFreela.Application
         }
         private static IServiceCollection AddServices(this IServiceCollection services)
         {
-            services.AddScoped<IProjectService, ProjectService>();
+           
             services.AddScoped<ISkillService, SkillService>();
             services.AddScoped<IUserService, UserService>();
             // Register application services here
@@ -29,6 +29,7 @@ namespace DevFreela.Application
             // Register command and query handlers here
             return services;
         }
+
     }
 
 }

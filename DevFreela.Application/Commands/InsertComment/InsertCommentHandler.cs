@@ -1,27 +1,21 @@
 ﻿using DevFreela.Application.Models;
 using DevFreela.Core.Entities;
-using DevFreela.Infrastruture.Persistence;
+using DevFreela.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DevFreela.Application.Commands.InsertComment
 {
     public class InsertCommentHandler : IRequestHandler<InsertCommentCommand, ResultViewModel>
     {
-        private readonly DevFreelaDbContext _context;
-        public InsertCommentHandler(DevFreelaDbContext context)
+        private readonly IProjectRepository _projectRepository;
+        public InsertCommentHandler(IProjectRepository projectRepository)
         {
-            _context = context;
+            _projectRepository = projectRepository;
         }
 
         public async Task<ResultViewModel> Handle(InsertCommentCommand request, CancellationToken cancellationToken)
         {
-            var project = await _context.Projects.SingleOrDefaultAsync(p => p.Id == request.ProjectId);
+            var project = _projectRepository.GetById(request.ProjectId);
 
             if (project is null)
             {
@@ -30,9 +24,8 @@ namespace DevFreela.Application.Commands.InsertComment
 
             var comment = new ProjectComment(request.Content, request.ProjectId, request.UserId);
 
-            await _context.ProjectComments.AddAsync(comment);
+            await _projectRepository.AddComent(comment);
 
-            await _context.SaveChangesAsync();
             return ResultViewModel.Sucess();
         }
     }
