@@ -6,8 +6,9 @@ namespace DevFreela.Application.Commands.InsertProject
 {
     public class InsertProjectHandler : IRequestHandler<InsertProjectCommand, ResultViewModel<int>>
     {
-        private readonly IProjectRepository _repository;
-        public InsertProjectHandler(IProjectRepository repository)
+        private readonly IMediator _mediator;
+        private readonly IProjectRepository _projectRepository;
+        public InsertProjectHandler(IMediator mediator, IProjectRepository projectRepository)
         {
             _repository = repository;
         }
@@ -15,10 +16,12 @@ namespace DevFreela.Application.Commands.InsertProject
         public async Task<ResultViewModel<int>> Handle(InsertProjectCommand request, CancellationToken cancellationToken)
         {
             var project = request.ToEntity();
+            var id = await _projectRepository.Add(project);
 
-            var id = await _repository.Add(project);
 
-            return ResultViewModel<int>.Success(id);
+            var projectCreated = new ProjectCretedNotification(request.IdClient, project.Title, project.TotalCost);
+            await _mediator.Publish(projectCreated);
+            return ResultViewModel<int>.Sucess(id);
         }
     }
 }

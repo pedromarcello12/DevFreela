@@ -20,12 +20,10 @@ namespace DevFreela.Application.Commands.UpdateProject
             {
                 return ResultViewModel.Error("Projeto não existe.");
             }
-
+            var project = await _projectRepository.GetById(request.Id);
             project.Update(request.Title, request.Description, request.TotalCost);
-
-            await _repository.Update(project);
-
-            return ResultViewModel.Success();
+            _projectRepository.Update(project);
+            return ResultViewModel.Sucess();
         }
     }
 }
