@@ -21,7 +21,7 @@ namespace DevFreela.Application.Commands.UpdateProject
                 return ResultViewModel.Error("Projeto não encontrado");
             }
             var project = await _projectRepository.GetById(request.Id);
-            project.Update(request.Title, request.Description,request.TotalCost);
+            project.Update(request.Title, request.Description, request.TotalCost);
             _projectRepository.Update(project);
             return ResultViewModel.Sucess();
         }

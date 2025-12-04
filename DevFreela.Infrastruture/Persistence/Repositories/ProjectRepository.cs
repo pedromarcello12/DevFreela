@@ -1,12 +1,6 @@
-﻿using Azure.Core;
-using DevFreela.Core.Entities;
+﻿using DevFreela.Core.Entities;
 using DevFreela.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DevFreela.Infrastruture.Persistence.Repositories
 {
@@ -34,7 +28,7 @@ namespace DevFreela.Infrastruture.Persistence.Repositories
 
         public async Task Delete(int id)
         {
-            var project = await _context.Projects.SingleOrDefaultAsync(p => p.Id ==  id);
+            var project = await _context.Projects.SingleOrDefaultAsync(p => p.Id == id);
 
             project.SetAsDeleted();
             _context.Projects.Update(project);

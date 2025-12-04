@@ -1,18 +1,13 @@
 ﻿using DevFreela.Application.Models;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DevFreela.Application.Validators
 {
-    public class CreateUserValidator :AbstractValidator<CreateUserInputModel>
+    public class CreateUserValidator : AbstractValidator<CreateUserInputModel>
     {
         public CreateUserValidator()
         {
-           
+
             RuleFor(u => u.Email)
                 .NotEmpty().WithMessage("Email não pode ser vazio")
                 .EmailAddress().WithMessage("Email em formato inválido");

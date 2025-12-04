@@ -12,17 +12,17 @@ namespace DevFreela.Infrastruture
         public static IServiceCollection AddInfrastruture(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddRepositories()
-                    .AddData(configuration) ;
+                    .AddData(configuration);
             // Add infrastructure services here
             return services;
         }
         private static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped<IProjectRepository,ProjectRepository>();
+            services.AddScoped<IProjectRepository, ProjectRepository>();
             // Register repositories here
             return services;
         }
-        private static IServiceCollection AddData(this IServiceCollection services,IConfiguration configuration)
+        private static IServiceCollection AddData(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("DevFreelaCs");
 
