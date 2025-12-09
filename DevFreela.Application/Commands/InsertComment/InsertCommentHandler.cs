@@ -7,26 +7,26 @@ namespace DevFreela.Application.Commands.InsertComment
 {
     public class InsertCommentHandler : IRequestHandler<InsertCommentCommand, ResultViewModel>
     {
-        private readonly IProjectRepository _projectRepository;
-        public InsertCommentHandler(IProjectRepository projectRepository)
+        private readonly IProjectRepository _repository;
+        public InsertCommentHandler(IProjectRepository repository)
         {
-            _projectRepository = projectRepository;
+            _repository = repository;
         }
 
         public async Task<ResultViewModel> Handle(InsertCommentCommand request, CancellationToken cancellationToken)
         {
-            var project = _projectRepository.GetById(request.ProjectId);
+            var exists = await _repository.Exists(request.IdProject);
 
-            if (project is null)
+            if (!exists)
             {
-                return ResultViewModel.Error("Projeto não encontrado");
+                return ResultViewModel.Error("Projeto não existe.");
             }
 
-            var comment = new ProjectComment(request.Content, request.ProjectId, request.UserId);
+            var comment = new ProjectComment(request.Content, request.IdProject, request.IdUser);
 
-            await _projectRepository.AddComent(comment);
+            await _repository.AddComment(comment);
 
-            return ResultViewModel.Sucess();
+            return ResultViewModel.Success();
         }
     }
 }

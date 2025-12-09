@@ -6,24 +6,26 @@ namespace DevFreela.Application.Commands.UpdateProject
 {
     public class UpdateProjectHandler : IRequestHandler<UpdateProjectCommand, ResultViewModel>
     {
-        private readonly IProjectRepository _projectRepository;
-        public UpdateProjectHandler(IProjectRepository projectRepository)
+        private readonly IProjectRepository _repository;
+        public UpdateProjectHandler(IProjectRepository repository)
         {
-            _projectRepository = projectRepository;
+            _repository = repository;
         }
+
         public async Task<ResultViewModel> Handle(UpdateProjectCommand request, CancellationToken cancellationToken)
         {
-            var exists = await _projectRepository.Exists(request.Id);
+            var project = await _repository.GetById(request.IdProject);
 
-
-            if (!exists)
+            if (project is null)
             {
-                return ResultViewModel.Error("Projeto não encontrado");
+                return ResultViewModel.Error("Projeto não existe.");
             }
-            var project = await _projectRepository.GetById(request.Id);
+
             project.Update(request.Title, request.Description, request.TotalCost);
-            _projectRepository.Update(project);
-            return ResultViewModel.Sucess();
+
+            await _repository.Update(project);
+
+            return ResultViewModel.Success();
         }
     }
 }

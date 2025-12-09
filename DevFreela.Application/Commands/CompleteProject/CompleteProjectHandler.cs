@@ -4,26 +4,28 @@ using MediatR;
 
 namespace DevFreela.Application.Commands.CompleteProject
 {
-
     public class CompleteProjectHandler : IRequestHandler<CompleteProjectCommand, ResultViewModel>
     {
-        private readonly IProjectRepository _projectRepository;
-        public CompleteProjectHandler(IProjectRepository project)
+        private readonly IProjectRepository _repository;
+        public CompleteProjectHandler(IProjectRepository repository)
         {
-            _projectRepository = project;
+            _repository = repository;
         }
+
         public async Task<ResultViewModel> Handle(CompleteProjectCommand request, CancellationToken cancellationToken)
         {
-            var project = await _projectRepository.GetById(request.Id);
+            var project = await _repository.GetById(request.Id);
 
             if (project is null)
             {
-                return ResultViewModel.Error("Projeto não encontrado");
+                return ResultViewModel.Error("Projeto não existe.");
             }
 
             project.Complete();
-            _projectRepository.Update(project);
-            return ResultViewModel.Sucess();
+
+            await _repository.Update(project);
+
+            return ResultViewModel.Success();
         }
     }
 }

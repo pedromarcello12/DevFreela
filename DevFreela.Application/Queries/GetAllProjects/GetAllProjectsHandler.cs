@@ -6,18 +6,19 @@ namespace DevFreela.Application.Queries.GetAllProjects
 {
     public class GetAllProjectsHandler : IRequestHandler<GetAllProjectsQuery, ResultViewModel<List<ProjectItemViewModel>>>
     {
-        private readonly IProjectRepository _projectRepository;
-        public GetAllProjectsHandler(IProjectRepository projectRepository)
+        private readonly IProjectRepository _repository;
+        public GetAllProjectsHandler(IProjectRepository repository)
         {
-            _projectRepository = projectRepository;
+            _repository = repository;
         }
+
         public async Task<ResultViewModel<List<ProjectItemViewModel>>> Handle(GetAllProjectsQuery request, CancellationToken cancellationToken)
         {
-            var projects = _projectRepository.GetAllAsync();
+            var projects = await _repository.GetAll();
 
-            var model = projects.Result.Select(ProjectItemViewModel.FromEntity).ToList();
+            var model = projects.Select(ProjectItemViewModel.FromEntity).ToList();
 
-            return ResultViewModel<List<ProjectItemViewModel>>.Sucess(model);
+            return ResultViewModel<List<ProjectItemViewModel>>.Success(model);
         }
     }
 }
