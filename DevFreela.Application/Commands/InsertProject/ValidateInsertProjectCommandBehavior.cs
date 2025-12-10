@@ -1,5 +1,5 @@
 ﻿using DevFreela.Application.Models;
-using DevFreela.Infrastruture.Persistence;
+using DevFreela.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

@@ -4,7 +4,7 @@ namespace DevFreela.Application.Models
 {
     public class ProjectItemViewModel
     {
-        public ProjectItemViewModel(int id, string title, string clientName, string freelancerName, decimal totalCost)
+        public ProjectItemViewModel(int id, string title,string clientName, string freelancerName, decimal totalCost)
         {
             Id = id;
             Title = title;

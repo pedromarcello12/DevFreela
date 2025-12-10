@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace DevFreela.Infrastruture.Persistence.Migrations
+namespace DevFreela.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class PrimeiraMigration : Migration
@@ -115,6 +115,7 @@ namespace DevFreela.Infrastruture.Persistence.Migrations
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IdProject = table.Column<int>(type: "int", nullable: false),
                     IdUser = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -128,11 +129,11 @@ namespace DevFreela.Infrastruture.Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ProjectComments_Users_IdUser",
-                        column: x => x.IdUser,
+                        name: "FK_ProjectComments_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -141,9 +142,9 @@ namespace DevFreela.Infrastruture.Persistence.Migrations
                 column: "IdProject");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectComments_IdUser",
+                name: "IX_ProjectComments_UserId",
                 table: "ProjectComments",
-                column: "IdUser");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projects_IdClient",

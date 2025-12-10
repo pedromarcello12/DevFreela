@@ -1,6 +1,6 @@
 ﻿using DevFreela.Application.Models;
 using DevFreela.Core.Entities;
-using DevFreela.Infrastruture.Persistence;
+using DevFreela.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -40,7 +40,7 @@ namespace DevFreela.Application.Services
             }
 
             var model = UserViewModel.FromEntity(user);
-            return ResultViewModel<UserViewModel>.Sucess(model);
+            return ResultViewModel<UserViewModel>.Success(model);
         }
         public ResultViewModel<int> Insert(CreateUserInputModel model)
         {
@@ -48,7 +48,7 @@ namespace DevFreela.Application.Services
 
             _context.Users.Add(user);
             _context.SaveChanges();
-            return ResultViewModel<int>.Sucess(user.Id);
+            return ResultViewModel<int>.Success(user.Id);
         }
         public ResultViewModel InsertSkills(UserSkillsInputModel model)
         {
@@ -56,12 +56,12 @@ namespace DevFreela.Application.Services
 
             _context.UserSkills.AddRange(userSkills);
             _context.SaveChanges();
-            return ResultViewModel.Sucess();
+            return ResultViewModel.Success();
         }
         public ResultViewModel InsertProfilePicture(int id, IFormFile file)
         {
             var description = $"FIle: {file.FileName}, Size: {file.Length}";
-            return ResultViewModel.Sucess();
+            return ResultViewModel.Success();
         }
     }
 }
