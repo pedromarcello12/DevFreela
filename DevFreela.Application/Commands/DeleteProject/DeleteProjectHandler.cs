@@ -1,6 +1,13 @@
 ﻿using DevFreela.Application.Models;
 using DevFreela.Core.Repositories;
+using DevFreela.Infrastruture.Persistence;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DevFreela.Application.Commands.DeleteProject
 {
@@ -24,9 +31,8 @@ namespace DevFreela.Application.Commands.DeleteProject
             }
 
             project.SetAsDeleted();
-            await _repository.Update(project);
-
-            return ResultViewModel.Success();
+            _projectRepository.Update(project);
+            return ResultViewModel.Sucess();
         }
     }
 }

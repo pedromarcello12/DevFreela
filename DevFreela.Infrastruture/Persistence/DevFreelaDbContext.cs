@@ -8,7 +8,7 @@ namespace DevFreela.Infrastruture.Persistence
         public DevFreelaDbContext(DbContextOptions<DevFreelaDbContext> options)
             : base(options)
         {
-
+            
         }
 
         public DbSet<Project> Projects { get; set; }

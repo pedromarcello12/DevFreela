@@ -1,4 +1,9 @@
 ﻿using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DevFreela.Application.Notification.ProjectCreated
 {
@@ -6,7 +11,7 @@ namespace DevFreela.Application.Notification.ProjectCreated
     {
         public Task Handle(ProjectCretedNotification notification, CancellationToken cancellationToken)
         {
-            return Task.CompletedTask;
+           return Task.CompletedTask;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DevFreela.Application.Models;
 using DevFreela.Infrastructure.Persistence;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace DevFreela.Application.Commands.InsertProject
 {

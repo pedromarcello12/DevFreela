@@ -6,7 +6,7 @@ namespace DevFreela.Application.Services
 {
     public interface ISkillService
     {
-        ResultViewModel<List<Skill>> GetAll(string search = "");
+        ResultViewModel<List<Skill>> GetAll(string search ="");
         ResultViewModel Insert(CreateSkillInputModel model);
     }
     public class SkillService : ISkillService

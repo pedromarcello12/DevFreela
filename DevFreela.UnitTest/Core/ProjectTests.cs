@@ -1,7 +1,5 @@
-﻿using Bogus;
-using DevFreela.Core.Entities;
+﻿using DevFreela.Core.Entities;
 using DevFreela.Core.Enums;
-using DevFreela.UnitTest.Fakes;
 
 namespace DevFreela.UnitTest.Core
 {
@@ -18,7 +16,6 @@ namespace DevFreela.UnitTest.Core
                 2,
                 1000m
             );
-            
             // Act
             project.Start();
 
@@ -109,7 +106,13 @@ namespace DevFreela.UnitTest.Core
         public void ProjectIsCreated_Cancel_NoChangeInStatus()
         {
             // Arrange
-            var project = FakeDataHelper.CreateFakeProjectV1();
+            var project = new Project(
+                "Projeto A",
+                "Descrição do projeto",
+                1,
+                2,
+                1000m
+            );
             // Act
             project.Cancel();
             // Assert
