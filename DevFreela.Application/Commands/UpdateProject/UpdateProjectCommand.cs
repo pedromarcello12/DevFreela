@@ -10,9 +10,14 @@ namespace DevFreela.Application.Commands.UpdateProject
 {
     public class UpdateProjectCommand : IRequest<ResultViewModel>
     {
-        public int IdProject { get; set; }
+        public UpdateProjectCommand(int id)
+        {
+            Id = id;
+        }
+        public int Id { get; }
         public string Title { get; set; }
         public string Description { get; set; }
         public decimal TotalCost { get; set; }
+
     }
 }

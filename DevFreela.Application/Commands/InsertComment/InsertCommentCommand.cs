@@ -7,12 +7,11 @@ namespace DevFreela.Application.Commands.InsertComment
     {
         public InsertCommentCommand()
         {
-            
+
         }
         public int ProjectId { get; set; }
         public int UserId { get; set; }
         public string Content { get; set; }
-        public int IdProject { get; set; }
-        public int IdUser { get; set; }
+
     }
 }

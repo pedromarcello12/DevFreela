@@ -14,7 +14,7 @@ namespace DevFreela.Application.Commands.CompleteProject
         {
             Id = id;
         }
-
         public int Id { get; set; }
+
     }
 }

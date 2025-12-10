@@ -1,6 +1,6 @@
 ﻿using DevFreela.Application.Models;
 using DevFreela.Core.Entities;
-using DevFreela.Infrastructure.Persistence;
+using DevFreela.Infrastruture.Persistence;
 
 namespace DevFreela.Application.Services
 {
@@ -19,7 +19,7 @@ namespace DevFreela.Application.Services
         public ResultViewModel<List<Skill>> GetAll(string search = "")
         {
             var skills = _context.Skills.ToList();
-            return ResultViewModel<List<Skill>>.Success(skills);
+            return ResultViewModel<List<Skill>>.Sucess(skills);
         }
         public ResultViewModel Insert(CreateSkillInputModel model)
         {
@@ -27,7 +27,7 @@ namespace DevFreela.Application.Services
 
             _context.Skills.Add(skill);
             _context.SaveChanges();
-            return ResultViewModel.Success();
+            return ResultViewModel.Sucess();
         }
     }
 }

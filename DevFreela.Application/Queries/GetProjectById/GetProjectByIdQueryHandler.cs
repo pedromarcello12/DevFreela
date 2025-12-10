@@ -14,7 +14,7 @@ namespace DevFreela.Application.Queries.GetProjectById
 
         public async Task<ResultViewModel<ProjectViewModel>> Handle(GetProjectByIdQuery request, CancellationToken cancellationToken)
         {
-            var project = _projectRepository.GetDetailsById(request.Id).Result;
+            var project = _projectRepository.GetDetailById(request.Id).Result;
             if (project == null)
             {
                 return ResultViewModel<ProjectViewModel>.Error("Projeto não encontrado");
@@ -22,7 +22,7 @@ namespace DevFreela.Application.Queries.GetProjectById
 
             var model = ProjectViewModel.FromEntity(project);
 
-            return ResultViewModel<ProjectViewModel>.Success(model);
+            return ResultViewModel<ProjectViewModel>.Sucess(model);
         }
     }
 }

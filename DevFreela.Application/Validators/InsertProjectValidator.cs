@@ -1,10 +1,5 @@
 ﻿using DevFreela.Application.Commands.InsertProject;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DevFreela.Application.Validators
 {
@@ -13,14 +8,16 @@ namespace DevFreela.Application.Validators
         public InsertProjectValidator()
         {
             RuleFor(p => p.Title)
-                .NotEmpty()
-                    .WithMessage("Não pode ser vazio.")
-                .MaximumLength(50)
-                    .WithMessage("Tamanho máximo é 50 caracteres.");
-
+                .NotEmpty().WithMessage("Não pode ser vazio")
+                .MaximumLength(100).WithMessage("Tamanho máximo é 100");
+            RuleFor(p => p.Description)
+                .NotEmpty().WithMessage("Não pode ser vazio");
+            RuleFor(p => p.IdClient)
+                .GreaterThan(0).WithMessage("IdCliente deve ser maior que zero");
+            RuleFor(p => p.IdFreelancer)
+                .GreaterThan(0).WithMessage("IdFreelancer deve ser maior que zero");
             RuleFor(p => p.TotalCost)
-                .GreaterThanOrEqualTo(1000)
-                    .WithMessage("O projeto deve custar pelo menos R$1.000");
+                .GreaterThan(0).WithMessage("TotalCost maior que zero");
         }
     }
 }

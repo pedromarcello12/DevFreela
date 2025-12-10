@@ -15,7 +15,6 @@ namespace DevFreela.Application.Queries.GetProjectById
         {
             Id = id;
         }
-
-        public int Id { get; set; }
+        public int Id { get; }
     }
 }
